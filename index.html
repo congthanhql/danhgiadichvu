@@ -110,20 +110,7 @@
   .detail-label{font-size:11px;font-weight:700;color:#d97706;text-transform:uppercase;letter-spacing:.5px;margin-bottom:3px}
   .detail-text{color:#374151;line-height:1.6;font-size:14px}
 
-  /* Names panel */
-  .names-panel{background:#fff;border-radius:14px;padding:20px 24px;box-shadow:0 2px 12px rgba(0,0,0,.06);margin-bottom:20px;border:2px dashed #fde68a}
-  .names-panel-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:0}
-  .names-panel-title{font-size:15px;font-weight:700;color:#1e293b;display:flex;align-items:center;gap:8px}
-  .names-reveal-btn{padding:8px 18px;border-radius:10px;border:none;background:linear-gradient(135deg,#d97706,#f59e0b);color:#fff;font-size:14px;font-weight:700;cursor:pointer;transition:.15s;display:flex;align-items:center;gap:6px;box-shadow:0 2px 10px rgba(217,119,6,.25)}
-  .names-reveal-btn:hover{opacity:.9}
-  .names-reveal-btn.revealed{background:linear-gradient(135deg,#0f766e,#14b8a6);box-shadow:0 2px 10px rgba(20,184,166,.25)}
-  .names-list{margin-top:16px;display:flex;flex-direction:column;gap:8px}
-  .name-item{display:flex;align-items:center;gap:12px;padding:10px 14px;background:#fffbeb;border-radius:10px;border:1px solid #fde68a}
-  .name-idx{font-size:12px;font-weight:700;color:#d97706;width:24px;flex-shrink:0}
-  .name-text{font-size:15px;font-weight:600;color:#1e293b;transition:all .2s}
-  .name-text.masked{color:#cbd5e1;letter-spacing:2px}
-  .name-star{font-size:13px;color:#f59e0b;margin-left:auto}
-  .name-time{font-size:11px;color:#94a3b8;flex-shrink:0}
+
 
   .fb-badge{display:inline-flex;align-items:center;gap:5px;font-size:11px;padding:3px 10px;border-radius:20px;font-weight:600;margin-bottom:10px}
   .fb-badge.ok{background:#dcfce7;color:#16a34a}
@@ -498,7 +485,6 @@ async function loadAdmin(){
 
     const total=allResponses.length;
     document.getElementById("stat-total").textContent=total;
-    document.getElementById("names-count").textContent=total ? `(${total} người)` : "";
 
     if(total){
       const avg=(allResponses.reduce((s,r)=>s+Number(r.stars),0)/total).toFixed(1);
