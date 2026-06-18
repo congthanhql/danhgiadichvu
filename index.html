@@ -287,6 +287,10 @@
         </div>
         <div class="admin-btns">
           <button class="btn-outline" onclick="loadAdmin()">🔄 Tải lại</button>
+          <button class="btn-outline" id="names-reveal-btn" onclick="openRevealModal()" style="gap:6px">
+            <svg id="btn-eye-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/><line x1="3" y1="3" x2="21" y2="21" id="eye-slash"/></svg>
+            <span id="btn-reveal-label">Hiện tên</span>
+          </button>
           <button class="btn-outline" style="background:linear-gradient(135deg,#16a34a,#22c55e);color:#fff;border-color:#16a34a" onclick="downloadCSV()">⬇️ Tải CSV</button>
           <button class="btn-outline btn-danger" onclick="doLogout()">Đăng xuất</button>
         </div>
@@ -315,19 +319,7 @@
         <div id="star-breakdown"></div>
       </div>
 
-      <!-- Names panel -->
-      <div class="names-panel">
-        <div class="names-panel-header">
-          <div class="names-panel-title">👥 Danh sách người đánh giá <span id="names-count" style="color:#94a3b8;font-weight:400;font-size:13px"></span></div>
-          <button class="names-reveal-btn" id="names-reveal-btn" onclick="openRevealModal()">
-            <svg id="btn-eye-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/><line x1="3" y1="3" x2="21" y2="21" id="eye-slash"/></svg>
-            <span id="btn-reveal-label">Hiện họ tên</span>
-          </button>
-        </div>
-        <div id="names-list-container" style="display:none">
-          <div class="names-list" id="names-list"></div>
-        </div>
-      </div>
+
 
       <input class="search-box" type="text" placeholder="🔍 Tìm kiếm theo số sao hoặc góp ý..." oninput="renderList(this.value)" id="search-input"/>
 
@@ -490,9 +482,11 @@ async function loadAdmin(){
   namesRevealed=false;
   const revealBtn=document.getElementById("names-reveal-btn");
   revealBtn.classList.remove("revealed");
-  document.getElementById("btn-reveal-label").textContent="Hiện họ tên";
+  revealBtn.style.background="";
+  revealBtn.style.color="";
+  revealBtn.style.borderColor="";
+  document.getElementById("btn-reveal-label").textContent="Hiện tên";
   document.getElementById("eye-slash").style.display="";
-  document.getElementById("names-list-container").style.display="none";
   setFbStatus("loading","⏳ Đang tải...");
   document.getElementById("resp-container").innerHTML='<div class="empty-box">⏳ Đang tải dữ liệu...</div>';
 
@@ -554,34 +548,20 @@ function renderStarBreakdown(){
 // ─── NAMES REVEAL ────────────────────────────────────────
 function openRevealModal(){
   if(namesRevealed){
-    // Toggle mask/unmask
-    const allNameTexts=document.querySelectorAll(".name-text");
     const allRespNames=document.querySelectorAll(".resp-name");
-    const isCurrentlyMasked=allNameTexts[0]&&allNameTexts[0].classList.contains("masked");
+    const isCurrentlyMasked=allRespNames[0]&&allRespNames[0].classList.contains("masked");
     if(isCurrentlyMasked){
-      // Reveal: remove masks
-      allNameTexts.forEach(el=>{
-        el.classList.remove("masked");
-        el.textContent=el.dataset.full;
-      });
-      allRespNames.forEach(el=>{
-        el.classList.remove("masked");
-        el.textContent=el.dataset.full;
-      });
-      document.getElementById("btn-reveal-label").textContent="Ẩn họ tên";
+      allRespNames.forEach(el=>{ el.classList.remove("masked"); el.textContent=el.dataset.full; });
+      document.getElementById("btn-reveal-label").textContent="Ẩn tên";
       document.getElementById("eye-slash").style.display="none";
+      document.getElementById("names-reveal-btn").style.color="#0f766e";
+      document.getElementById("names-reveal-btn").style.borderColor="#14b8a6";
     } else {
-      // Mask again
-      allNameTexts.forEach(el=>{
-        el.classList.add("masked");
-        el.textContent=maskName(el.dataset.full);
-      });
-      allRespNames.forEach(el=>{
-        el.classList.add("masked");
-        el.textContent=maskName(el.dataset.full);
-      });
-      document.getElementById("btn-reveal-label").textContent="Hiện họ tên";
+      allRespNames.forEach(el=>{ el.classList.add("masked"); el.textContent=maskName(el.dataset.full); });
+      document.getElementById("btn-reveal-label").textContent="Hiện tên";
       document.getElementById("eye-slash").style.display="";
+      document.getElementById("names-reveal-btn").style.color="";
+      document.getElementById("names-reveal-btn").style.borderColor="";
     }
     return;
   }
@@ -604,38 +584,15 @@ function confirmReveal(){
   namesRevealed=true;
   closeModal();
 
-  // Render names list (masked initially, will be unmasked below)
-  const sorted=[...allResponses].reverse();
-  const namesList=document.getElementById("names-list");
-  if(!sorted.length){
-    namesList.innerHTML='<div style="color:#94a3b8;text-align:center;padding:16px">Chưa có đánh giá nào.</div>';
-  } else {
-    namesList.innerHTML=sorted.map((r,i)=>{
-      const dt=new Date(r.submittedAt).toLocaleDateString("vi-VN");
-      const stars="★".repeat(r.stars||0)+"☆".repeat(5-(r.stars||0));
-      return `<div class="name-item">
-        <span class="name-idx">${i+1}</span>
-        <span class="name-text" data-full="${esc(r.name)}">${esc(r.name)}</span>
-        <span class="name-star">${stars}</span>
-        <span class="name-time">${dt}</span>
-      </div>`;
-    }).join("");
-  }
-
-  document.getElementById("names-list-container").style.display="block";
-
-  // Also update resp-name elements in the list to show real names (unmasked)
+  // Unmask all resp-name elements
   document.querySelectorAll(".resp-name").forEach(el=>{
-    if(el.dataset.full){
-      el.classList.remove("masked");
-      el.textContent=el.dataset.full;
-    }
+    if(el.dataset.full){ el.classList.remove("masked"); el.textContent=el.dataset.full; }
   });
 
-  const revealBtn=document.getElementById("names-reveal-btn");
-  revealBtn.classList.add("revealed");
-  document.getElementById("btn-reveal-label").textContent="Ẩn họ tên";
+  document.getElementById("btn-reveal-label").textContent="Ẩn tên";
   document.getElementById("eye-slash").style.display="none";
+  document.getElementById("names-reveal-btn").style.color="#0f766e";
+  document.getElementById("names-reveal-btn").style.borderColor="#14b8a6";
 }
 
 document.getElementById("modal-reveal").addEventListener("click",function(e){
