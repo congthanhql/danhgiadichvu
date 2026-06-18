@@ -1,4 +1,3 @@
-<div class="separator" style="clear: both; text-align: center;"><a href="https://blogger.googleusercontent.com/img/a/AVvXsEi5598NqbkdhVPwTRqnQ7bEP7rgXh6Xr3_uL00K9aMRJR4G__P5vKDNMLH3rs3wMFBOsvYyKvkCGSqDzfelRsvxD5dtrnCkSUySnGyrELZiM8cSTmu4h47v5TfUuNHTb-njy3Idv55ZhId1HYKLsebIBYTDyhX5PujXRQMLBJB7APscMYF9R2pDRdDCcLoZ" style="margin-left: 1em; margin-right: 1em;"><img alt="" data-original-height="1024" data-original-width="1024" height="41" src="https://blogger.googleusercontent.com/img/a/AVvXsEi5598NqbkdhVPwTRqnQ7bEP7rgXh6Xr3_uL00K9aMRJR4G__P5vKDNMLH3rs3wMFBOsvYyKvkCGSqDzfelRsvxD5dtrnCkSUySnGyrELZiM8cSTmu4h47v5TfUuNHTb-njy3Idv55ZhId1HYKLsebIBYTDyhX5PujXRQMLBJB7APscMYF9R2pDRdDCcLoZ" width="41" /></a></div><br />
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -28,7 +27,6 @@
 
   .field{margin-bottom:24px}
   label.lbl{display:block;font-weight:600;font-size:15px;color:#1e293b;margin-bottom:6px}
-  .hint{font-size:12px;color:#94a3b8;margin:-2px 0 8px}
   .req{color:#ef4444}
   .opt{color:#94a3b8;font-weight:400;font-size:13px}
   input[type=text],input[type=email],input[type=password],input[type=number],textarea{width:100%;padding:11px 14px;border-radius:10px;border:1.5px solid #e2e8f0;font-size:15px;outline:none;transition:border .2s;color:#1e293b;background:#fafafa;font-family:inherit}
@@ -41,14 +39,12 @@
   .q-label{display:flex;align-items:flex-start;gap:10px;margin-bottom:12px}
   .q-num{flex-shrink:0;width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#d97706,#f59e0b);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700}
 
-  /* STAR RATING */
   .star-row{display:flex;gap:6px;align-items:center;margin-bottom:10px;flex-wrap:wrap}
   .star-btn{font-size:34px;cursor:pointer;transition:transform .15s;background:none;border:none;padding:2px;line-height:1;opacity:.3;filter:grayscale(1)}
   .star-btn.lit{opacity:1;filter:none}
   .star-btn:hover{transform:scale(1.15)}
   .star-desc{font-size:13px;color:#92400e;font-weight:600;background:#fef3c7;padding:4px 12px;border-radius:20px;margin-left:4px;white-space:nowrap}
 
-  /* YES/NO */
   .yesno-row{display:flex;gap:12px;margin-top:6px}
   .yesno-btn{flex:1;padding:12px;border-radius:12px;border:2px solid #e2e8f0;background:#fafafa;cursor:pointer;font-size:15px;font-weight:600;color:#475569;transition:all .15s;text-align:center}
   .yesno-btn:hover{border-color:#f59e0b}
@@ -81,7 +77,6 @@
   .stat-val{font-size:24px;font-weight:700;color:#d97706}
   .stat-lbl{font-size:12px;color:#64748b;margin-top:2px}
 
-  /* Star stats */
   .star-stats{background:#fff;border-radius:14px;padding:20px 24px;box-shadow:0 2px 12px rgba(0,0,0,.06);margin-bottom:20px}
   .star-stats h3{font-size:15px;font-weight:700;margin-bottom:14px;color:#1e293b}
   .sbar-row{display:flex;align-items:center;gap:10px;margin-bottom:9px}
@@ -103,7 +98,7 @@
   .resp-header{display:flex;justify-content:space-between;align-items:center;cursor:pointer;gap:10px}
   .resp-meta{display:flex;align-items:center;gap:10px;min-width:0}
   .avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#d97706,#f59e0b);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;flex-shrink:0}
-  .resp-name-masked{font-weight:600;font-size:15px}
+  .resp-name{font-weight:600;font-size:15px}
   .resp-time{font-size:12px;color:#94a3b8}
   .resp-right{display:flex;align-items:center;gap:8px;flex-shrink:0}
   .star-pill{background:#fef3c7;color:#92400e;padding:4px 10px;border-radius:20px;font-weight:700;font-size:13px;white-space:nowrap}
@@ -114,24 +109,19 @@
   .detail-label{font-size:11px;font-weight:700;color:#d97706;text-transform:uppercase;letter-spacing:.5px;margin-bottom:3px}
   .detail-text{color:#374151;line-height:1.6;font-size:14px}
 
-  /* Full name reveal */
-  .name-reveal-box{background:#fffbeb;border:1.5px solid #fde68a;border-radius:10px;padding:12px 16px}
-  .name-reveal-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-  .name-reveal-full{font-size:16px;font-weight:700;color:#92400e}
-  .reveal-btn{padding:6px 14px;border-radius:8px;border:none;background:#d97706;color:#fff;font-size:13px;font-weight:600;cursor:pointer;transition:.15s;white-space:nowrap}
-  .reveal-btn:hover{background:#b45309}
-  .reveal-input{padding:7px 12px;border-radius:8px;border:1.5px solid #fde68a;font-size:13px;outline:none;width:150px;background:#fff}
-  .reveal-input:focus{border-color:#d97706}
-  .reveal-err{color:#dc2626;font-size:12px;margin-top:4px}
-
-  /* Visit counter */
-  .visit-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:4px}
-  .visit-count-big{font-size:24px;font-weight:800;color:#d97706;min-width:36px}
-  .visit-lbl{font-size:13px;color:#92400e;font-weight:600}
-  .visit-input{width:80px;padding:7px 10px;border-radius:8px;border:1.5px solid #fde68a;font-size:14px;font-weight:700;text-align:center;color:#92400e;background:#fff;outline:none}
-  .visit-input:focus{border-color:#d97706}
-  .visit-save-btn{padding:7px 14px;border-radius:8px;border:none;background:#d97706;color:#fff;font-size:13px;font-weight:600;cursor:pointer;transition:.15s}
-  .visit-save-btn:hover{background:#b45309}
+  /* Names panel */
+  .names-panel{background:#fff;border-radius:14px;padding:20px 24px;box-shadow:0 2px 12px rgba(0,0,0,.06);margin-bottom:20px;border:2px dashed #fde68a}
+  .names-panel-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:0}
+  .names-panel-title{font-size:15px;font-weight:700;color:#1e293b;display:flex;align-items:center;gap:8px}
+  .names-reveal-btn{padding:8px 18px;border-radius:10px;border:none;background:linear-gradient(135deg,#d97706,#f59e0b);color:#fff;font-size:14px;font-weight:700;cursor:pointer;transition:.15s;display:flex;align-items:center;gap:6px;box-shadow:0 2px 10px rgba(217,119,6,.25)}
+  .names-reveal-btn:hover{opacity:.9}
+  .names-reveal-btn.revealed{background:linear-gradient(135deg,#64748b,#94a3b8)}
+  .names-list{margin-top:16px;display:flex;flex-direction:column;gap:8px}
+  .name-item{display:flex;align-items:center;gap:12px;padding:10px 14px;background:#fffbeb;border-radius:10px;border:1px solid #fde68a}
+  .name-idx{font-size:12px;font-weight:700;color:#d97706;width:24px;flex-shrink:0}
+  .name-full{font-size:15px;font-weight:600;color:#1e293b}
+  .name-star{font-size:13px;color:#f59e0b;margin-left:auto}
+  .name-time{font-size:11px;color:#94a3b8;flex-shrink:0}
 
   .fb-badge{display:inline-flex;align-items:center;gap:5px;font-size:11px;padding:3px 10px;border-radius:20px;font-weight:600;margin-bottom:10px}
   .fb-badge.ok{background:#dcfce7;color:#16a34a}
@@ -162,6 +152,8 @@
     .admin-top{flex-direction:column}
     .star-btn{font-size:28px}
     .resp-right{flex-direction:column;align-items:flex-end;gap:4px}
+    .admin-btns{width:100%}
+    .names-reveal-btn{font-size:13px;padding:7px 14px}
   }
 </style>
 </head>
@@ -177,12 +169,12 @@
   </div>
 </nav>
 
-<!-- Modal xác nhận mã admin để xem tên -->
+<!-- Modal xác nhận xem tất cả tên -->
 <div class="modal-overlay" id="modal-reveal">
   <div class="modal-box">
-    <div class="modal-icon">🔐</div>
-    <div class="modal-title">Xác nhận danh tính</div>
-    <div class="modal-sub">Nhập mã admin để xem họ tên đầy đủ</div>
+    <div class="modal-icon">👥</div>
+    <div class="modal-title">Xem tất cả họ tên</div>
+    <div class="modal-sub">Nhập mã admin để hiển thị họ tên đầy đủ của tất cả người đánh giá</div>
     <input class="modal-input" type="password" id="modal-pass" placeholder="Mã admin..." onkeydown="if(event.key==='Enter')confirmReveal()"/>
     <div class="modal-err" id="modal-err"></div>
     <div class="modal-btns">
@@ -321,7 +313,18 @@
         <div id="star-breakdown"></div>
       </div>
 
-      <input class="search-box" type="text" placeholder="🔍 Tìm kiếm theo tên hoặc góp ý..." oninput="renderList(this.value)" id="search-input"/>
+      <!-- Names panel -->
+      <div class="names-panel">
+        <div class="names-panel-header">
+          <div class="names-panel-title">👥 Danh sách người đánh giá <span id="names-count" style="color:#94a3b8;font-weight:400;font-size:13px"></span></div>
+          <button class="names-reveal-btn" id="names-reveal-btn" onclick="openRevealModal()">🔍 Xem tất cả họ tên</button>
+        </div>
+        <div id="names-list-container" style="display:none">
+          <div class="names-list" id="names-list"></div>
+        </div>
+      </div>
+
+      <input class="search-box" type="text" placeholder="🔍 Tìm kiếm theo số sao hoặc góp ý..." oninput="renderList(this.value)" id="search-input"/>
 
       <div id="resp-container"><div class="empty-box">⏳ Đang tải dữ liệu từ Firebase...</div></div>
     </div>
@@ -347,7 +350,6 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const db           = firebase.database();
 const responsesRef = db.ref("tshare_responses");
-const visitsRef    = db.ref("tshare_visits");
 
 // ─── CONSTANTS ────────────────────────────────────────────
 const ADMIN_PASS  = "Thanh123@";
@@ -359,20 +361,11 @@ let selectedRefer = null;
 let allResponses  = [];
 let openCardId    = null;
 let adminAuth     = false;
-let visitsCache   = {};
-// For modal reveal
-let pendingRevealId = null;
-let revealedNames   = {}; // id -> true if name revealed this session
+let namesRevealed = false;
 
 // ─── UTILS ───────────────────────────────────────────────
 function genId(){ return Date.now().toString(36)+Math.random().toString(36).slice(2,7); }
 function esc(s){ return String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
-function maskName(n){
-  if(!n) return "Ẩn danh";
-  const p=n.trim().split(" ");
-  return p.map((w,i)=>i===p.length-1?w[0]+"*".repeat(Math.max(w.length-1,1)):"*".repeat(w.length)).join(" ");
-}
-function starStr(n){ return "★".repeat(n)+"☆".repeat(5-n); }
 
 // ─── NAV ─────────────────────────────────────────────────
 function showPage(name){
@@ -476,7 +469,7 @@ function doLogin(){
 }
 function doLogout(){
   adminAuth=false;
-  revealedNames={};
+  namesRevealed=false;
   document.getElementById("admin-pass").value="";
   showPage("survey");
 }
@@ -484,21 +477,23 @@ function doLogout(){
 // ─── ADMIN LOAD ──────────────────────────────────────────
 async function loadAdmin(){
   if(!adminAuth){ showPage("adminLogin"); return; }
+  namesRevealed=false;
+  const revealBtn=document.getElementById("names-reveal-btn");
+  revealBtn.textContent="🔍 Xem tất cả họ tên";
+  revealBtn.classList.remove("revealed");
+  document.getElementById("names-list-container").style.display="none";
   setFbStatus("loading","⏳ Đang tải...");
   document.getElementById("resp-container").innerHTML='<div class="empty-box">⏳ Đang tải dữ liệu...</div>';
 
   try{
-    const [snap, vsnap] = await Promise.all([
-      responsesRef.once("value"),
-      visitsRef.once("value")
-    ]);
-    visitsCache = vsnap.val()||{};
+    const snap = await responsesRef.once("value");
     const raw = snap.val();
     allResponses = raw ? Object.values(raw) : [];
     allResponses.sort((a,b)=>new Date(a.submittedAt)-new Date(b.submittedAt));
 
     const total=allResponses.length;
     document.getElementById("stat-total").textContent=total;
+    document.getElementById("names-count").textContent=total ? `(${total} người)` : "";
 
     if(total){
       const avg=(allResponses.reduce((s,r)=>s+Number(r.stars),0)/total).toFixed(1);
@@ -545,11 +540,66 @@ function renderStarBreakdown(){
   }).join("");
 }
 
-// ─── RENDER LIST ─────────────────────────────────────────
+// ─── NAMES REVEAL ────────────────────────────────────────
+function openRevealModal(){
+  if(namesRevealed){
+    // Toggle hide/show if already revealed
+    const container=document.getElementById("names-list-container");
+    const isVisible=container.style.display!=="none";
+    container.style.display=isVisible?"none":"block";
+    return;
+  }
+  document.getElementById("modal-pass").value="";
+  document.getElementById("modal-err").textContent="";
+  document.getElementById("modal-reveal").classList.add("show");
+  setTimeout(()=>document.getElementById("modal-pass").focus(),100);
+}
+
+function closeModal(){
+  document.getElementById("modal-reveal").classList.remove("show");
+}
+
+function confirmReveal(){
+  const pass=document.getElementById("modal-pass").value;
+  if(pass!==ADMIN_PASS){
+    document.getElementById("modal-err").textContent="Mã admin không đúng.";
+    return;
+  }
+  namesRevealed=true;
+  closeModal();
+
+  // Render names list
+  const sorted=[...allResponses].reverse();
+  const namesList=document.getElementById("names-list");
+  if(!sorted.length){
+    namesList.innerHTML='<div style="color:#94a3b8;text-align:center;padding:16px">Chưa có đánh giá nào.</div>';
+  } else {
+    namesList.innerHTML=sorted.map((r,i)=>{
+      const dt=new Date(r.submittedAt).toLocaleDateString("vi-VN");
+      const stars="★".repeat(r.stars||0)+"☆".repeat(5-(r.stars||0));
+      return `<div class="name-item">
+        <span class="name-idx">${i+1}</span>
+        <span class="name-full">👤 ${esc(r.name)}</span>
+        <span class="name-star">${stars}</span>
+        <span class="name-time">${dt}</span>
+      </div>`;
+    }).join("");
+  }
+
+  document.getElementById("names-list-container").style.display="block";
+  const revealBtn=document.getElementById("names-reveal-btn");
+  revealBtn.textContent="👁 Ẩn danh sách";
+  revealBtn.classList.add("revealed");
+}
+
+document.getElementById("modal-reveal").addEventListener("click",function(e){
+  if(e.target===this) closeModal();
+});
+
+// ─── RENDER LIST (no names shown) ────────────────────────
 function renderList(q){
   const term=(q||"").toLowerCase();
   const filtered=allResponses.filter(r=>
-    (r.name||"").toLowerCase().includes(term)||
     (r.note||"").toLowerCase().includes(term)||
     (r.starLabel||"").toLowerCase().includes(term)
   );
@@ -561,33 +611,26 @@ function renderList(q){
   container.innerHTML='<div class="resp-list" id="resp-list"></div>';
   const list=document.getElementById("resp-list");
 
-  filtered.slice().reverse().forEach(r=>{
+  filtered.slice().reverse().forEach((r,idx)=>{
     const div=document.createElement("div");
     div.className="resp-card"+(openCardId===r.id?" open":"");
     div.id="card-"+r.id;
     const dt=new Date(r.submittedAt).toLocaleString("vi-VN");
-    const initials=(r.name||"?")[0].toUpperCase();
     const stars=r.stars||0;
     const starDisplay="★".repeat(stars)+"☆".repeat(5-stars);
     const referHtml=r.willRefer
       ?'<span class="refer-pill-yes">👍 Giới thiệu</span>'
       :'<span class="refer-pill-no">👎 Chưa chắc</span>';
-    const visits=visitsCache[r.id]||0;
     const isOpen=openCardId===r.id;
-
-    // Name reveal state
-    const nameRevealed=!!revealedNames[r.id];
-    const nameHtml=nameRevealed
-      ?`<span class="name-reveal-full">👤 ${esc(r.name)}</span>`
-      :`<span class="resp-name-masked">${esc(maskName(r.name))}</span>
-        <button class="reveal-btn" onclick="event.stopPropagation();openRevealModal('${r.id}')">🔍 Xem tên</button>`;
+    // Show order number instead of name
+    const orderNum=filtered.length-idx;
 
     div.innerHTML=`
       <div class="resp-header" onclick="toggleCard('${r.id}')">
         <div class="resp-meta">
-          <div class="avatar">${initials}</div>
+          <div class="avatar">${orderNum}</div>
           <div>
-            <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap" id="namerow-${r.id}">${nameHtml}</div>
+            <div class="resp-name" style="color:#64748b">Đánh giá #${orderNum}</div>
             <div class="resp-time">${dt}</div>
           </div>
         </div>
@@ -606,15 +649,6 @@ function renderList(q){
           <div class="detail-text">${r.willRefer?"✅ Có, sẵn sàng giới thiệu":"❌ Chưa sẵn sàng giới thiệu"}</div>
         </div>
         ${r.note?`<div><div class="detail-label">📝 Góp ý</div><div class="detail-text">${esc(r.note)}</div></div>`:""}
-        <div>
-          <div class="detail-label">🔄 Số lần quay lại</div>
-          <div class="visit-row">
-            <span class="visit-count-big" id="vdisp-${r.id}">${visits}</span>
-            <span class="visit-lbl">lần</span>
-            <input type="number" class="visit-input" id="vinput-${r.id}" value="${visits}" min="0" max="9999"/>
-            <button class="visit-save-btn" onclick="saveVisit('${r.id}')">Lưu</button>
-          </div>
-        </div>
       </div>`;
     list.appendChild(div);
   });
@@ -636,63 +670,10 @@ function toggleCard(id){
   }
 }
 
-// ─── REVEAL NAME MODAL ───────────────────────────────────
-function openRevealModal(id){
-  pendingRevealId=id;
-  document.getElementById("modal-pass").value="";
-  document.getElementById("modal-err").textContent="";
-  document.getElementById("modal-reveal").classList.add("show");
-  setTimeout(()=>document.getElementById("modal-pass").focus(),100);
-}
-
-function closeModal(){
-  document.getElementById("modal-reveal").classList.remove("show");
-  pendingRevealId=null;
-}
-
-function confirmReveal(){
-  const pass=document.getElementById("modal-pass").value;
-  if(pass!==ADMIN_PASS){
-    document.getElementById("modal-err").textContent="Mã admin không đúng.";
-    return;
-  }
-  if(!pendingRevealId) return;
-  revealedNames[pendingRevealId]=true;
-  closeModal();
-
-  // Update name row in DOM without full re-render
-  const r=allResponses.find(x=>x.id===pendingRevealId);
-  if(r){
-    const nameRow=document.getElementById("namerow-"+pendingRevealId);
-    if(nameRow){
-      nameRow.innerHTML=`<span class="name-reveal-full">👤 ${esc(r.name)}</span>`;
-    }
-  }
-}
-
-// click outside modal to close
-document.getElementById("modal-reveal").addEventListener("click",function(e){
-  if(e.target===this) closeModal();
-});
-
-// ─── SAVE VISIT ──────────────────────────────────────────
-async function saveVisit(id){
-  const input=document.getElementById("vinput-"+id);
-  const val=parseInt(input.value)||0;
-  try{
-    await visitsRef.child(id).set(val);
-    visitsCache[id]=val;
-    const disp=document.getElementById("vdisp-"+id);
-    if(disp) disp.textContent=val;
-    input.style.borderColor="#22c55e";
-    setTimeout(()=>{ input.style.borderColor=""; },1500);
-  }catch(e){ alert("Lỗi lưu: "+e.message); }
-}
-
 // ─── CSV ─────────────────────────────────────────────────
 function downloadCSV(){
   const rows=[
-    ["ID","Thời gian","Họ và tên","Số sao","Mức đánh giá","Sẵn sàng giới thiệu","Số lần quay lại","Góp ý"],
+    ["ID","Thời gian","Họ và tên","Số sao","Mức đánh giá","Sẵn sàng giới thiệu","Góp ý"],
     ...allResponses.map(r=>[
       r.id,
       new Date(r.submittedAt).toLocaleString("vi-VN"),
@@ -700,7 +681,6 @@ function downloadCSV(){
       r.stars,
       r.starLabel,
       r.willRefer?"Có":"Không",
-      visitsCache[r.id]||0,
       r.note||""
     ])
   ];
