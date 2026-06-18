@@ -99,6 +99,7 @@
   .resp-meta{display:flex;align-items:center;gap:10px;min-width:0}
   .avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#d97706,#f59e0b);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;flex-shrink:0}
   .resp-name{font-weight:600;font-size:15px}
+  .resp-name.masked{color:#cbd5e1;letter-spacing:2px;font-size:14px}
   .resp-time{font-size:12px;color:#94a3b8}
   .resp-right{display:flex;align-items:center;gap:8px;flex-shrink:0}
   .star-pill{background:#fef3c7;color:#92400e;padding:4px 10px;border-radius:20px;font-weight:700;font-size:13px;white-space:nowrap}
@@ -115,11 +116,12 @@
   .names-panel-title{font-size:15px;font-weight:700;color:#1e293b;display:flex;align-items:center;gap:8px}
   .names-reveal-btn{padding:8px 18px;border-radius:10px;border:none;background:linear-gradient(135deg,#d97706,#f59e0b);color:#fff;font-size:14px;font-weight:700;cursor:pointer;transition:.15s;display:flex;align-items:center;gap:6px;box-shadow:0 2px 10px rgba(217,119,6,.25)}
   .names-reveal-btn:hover{opacity:.9}
-  .names-reveal-btn.revealed{background:linear-gradient(135deg,#64748b,#94a3b8)}
+  .names-reveal-btn.revealed{background:linear-gradient(135deg,#0f766e,#14b8a6);box-shadow:0 2px 10px rgba(20,184,166,.25)}
   .names-list{margin-top:16px;display:flex;flex-direction:column;gap:8px}
   .name-item{display:flex;align-items:center;gap:12px;padding:10px 14px;background:#fffbeb;border-radius:10px;border:1px solid #fde68a}
   .name-idx{font-size:12px;font-weight:700;color:#d97706;width:24px;flex-shrink:0}
-  .name-full{font-size:15px;font-weight:600;color:#1e293b}
+  .name-text{font-size:15px;font-weight:600;color:#1e293b;transition:all .2s}
+  .name-text.masked{color:#cbd5e1;letter-spacing:2px}
   .name-star{font-size:13px;color:#f59e0b;margin-left:auto}
   .name-time{font-size:11px;color:#94a3b8;flex-shrink:0}
 
@@ -317,7 +319,10 @@
       <div class="names-panel">
         <div class="names-panel-header">
           <div class="names-panel-title">👥 Danh sách người đánh giá <span id="names-count" style="color:#94a3b8;font-weight:400;font-size:13px"></span></div>
-          <button class="names-reveal-btn" id="names-reveal-btn" onclick="openRevealModal()">🔍 Xem tất cả họ tên</button>
+          <button class="names-reveal-btn" id="names-reveal-btn" onclick="openRevealModal()">
+            <svg id="btn-eye-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/><line x1="3" y1="3" x2="21" y2="21" id="eye-slash"/></svg>
+            <span id="btn-reveal-label">Hiện họ tên</span>
+          </button>
         </div>
         <div id="names-list-container" style="display:none">
           <div class="names-list" id="names-list"></div>
@@ -366,6 +371,11 @@ let namesRevealed = false;
 // ─── UTILS ───────────────────────────────────────────────
 function genId(){ return Date.now().toString(36)+Math.random().toString(36).slice(2,7); }
 function esc(s){ return String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+function maskName(n){
+  if(!n) return "Ẩn danh";
+  const p=n.trim().split(" ");
+  return p.map((w,i)=>i===p.length-1?w[0]+"●".repeat(Math.max(w.length-1,1)):w[0]+"●".repeat(Math.max(w.length-1,1))).join(" ");
+}
 
 // ─── NAV ─────────────────────────────────────────────────
 function showPage(name){
@@ -479,8 +489,9 @@ async function loadAdmin(){
   if(!adminAuth){ showPage("adminLogin"); return; }
   namesRevealed=false;
   const revealBtn=document.getElementById("names-reveal-btn");
-  revealBtn.textContent="🔍 Xem tất cả họ tên";
   revealBtn.classList.remove("revealed");
+  document.getElementById("btn-reveal-label").textContent="Hiện họ tên";
+  document.getElementById("eye-slash").style.display="";
   document.getElementById("names-list-container").style.display="none";
   setFbStatus("loading","⏳ Đang tải...");
   document.getElementById("resp-container").innerHTML='<div class="empty-box">⏳ Đang tải dữ liệu...</div>';
@@ -543,10 +554,35 @@ function renderStarBreakdown(){
 // ─── NAMES REVEAL ────────────────────────────────────────
 function openRevealModal(){
   if(namesRevealed){
-    // Toggle hide/show if already revealed
-    const container=document.getElementById("names-list-container");
-    const isVisible=container.style.display!=="none";
-    container.style.display=isVisible?"none":"block";
+    // Toggle mask/unmask
+    const allNameTexts=document.querySelectorAll(".name-text");
+    const allRespNames=document.querySelectorAll(".resp-name");
+    const isCurrentlyMasked=allNameTexts[0]&&allNameTexts[0].classList.contains("masked");
+    if(isCurrentlyMasked){
+      // Reveal: remove masks
+      allNameTexts.forEach(el=>{
+        el.classList.remove("masked");
+        el.textContent=el.dataset.full;
+      });
+      allRespNames.forEach(el=>{
+        el.classList.remove("masked");
+        el.textContent=el.dataset.full;
+      });
+      document.getElementById("btn-reveal-label").textContent="Ẩn họ tên";
+      document.getElementById("eye-slash").style.display="none";
+    } else {
+      // Mask again
+      allNameTexts.forEach(el=>{
+        el.classList.add("masked");
+        el.textContent=maskName(el.dataset.full);
+      });
+      allRespNames.forEach(el=>{
+        el.classList.add("masked");
+        el.textContent=maskName(el.dataset.full);
+      });
+      document.getElementById("btn-reveal-label").textContent="Hiện họ tên";
+      document.getElementById("eye-slash").style.display="";
+    }
     return;
   }
   document.getElementById("modal-pass").value="";
@@ -568,7 +604,7 @@ function confirmReveal(){
   namesRevealed=true;
   closeModal();
 
-  // Render names list
+  // Render names list (masked initially, will be unmasked below)
   const sorted=[...allResponses].reverse();
   const namesList=document.getElementById("names-list");
   if(!sorted.length){
@@ -579,7 +615,7 @@ function confirmReveal(){
       const stars="★".repeat(r.stars||0)+"☆".repeat(5-(r.stars||0));
       return `<div class="name-item">
         <span class="name-idx">${i+1}</span>
-        <span class="name-full">👤 ${esc(r.name)}</span>
+        <span class="name-text" data-full="${esc(r.name)}">${esc(r.name)}</span>
         <span class="name-star">${stars}</span>
         <span class="name-time">${dt}</span>
       </div>`;
@@ -587,9 +623,19 @@ function confirmReveal(){
   }
 
   document.getElementById("names-list-container").style.display="block";
+
+  // Also update resp-name elements in the list to show real names (unmasked)
+  document.querySelectorAll(".resp-name").forEach(el=>{
+    if(el.dataset.full){
+      el.classList.remove("masked");
+      el.textContent=el.dataset.full;
+    }
+  });
+
   const revealBtn=document.getElementById("names-reveal-btn");
-  revealBtn.textContent="👁 Ẩn danh sách";
   revealBtn.classList.add("revealed");
+  document.getElementById("btn-reveal-label").textContent="Ẩn họ tên";
+  document.getElementById("eye-slash").style.display="none";
 }
 
 document.getElementById("modal-reveal").addEventListener("click",function(e){
@@ -622,15 +668,16 @@ function renderList(q){
       ?'<span class="refer-pill-yes">👍 Giới thiệu</span>'
       :'<span class="refer-pill-no">👎 Chưa chắc</span>';
     const isOpen=openCardId===r.id;
-    // Show order number instead of name
-    const orderNum=filtered.length-idx;
+    const initials=(r.name||"?")[0].toUpperCase();
+    const displayName = namesRevealed ? esc(r.name) : maskName(r.name);
+    const maskedClass = namesRevealed ? "" : " masked";
 
     div.innerHTML=`
       <div class="resp-header" onclick="toggleCard('${r.id}')">
         <div class="resp-meta">
-          <div class="avatar">${orderNum}</div>
+          <div class="avatar">${initials}</div>
           <div>
-            <div class="resp-name" style="color:#64748b">Đánh giá #${orderNum}</div>
+            <div class="resp-name${maskedClass}" data-full="${esc(r.name)}">${displayName}</div>
             <div class="resp-time">${dt}</div>
           </div>
         </div>
@@ -640,6 +687,10 @@ function renderList(q){
         </div>
       </div>
       <div class="resp-detail" id="detail-${r.id}" style="display:${isOpen?"flex":"none"}">
+        <div>
+          <div class="detail-label">👤 Người đánh giá</div>
+          <div class="detail-text resp-name${maskedClass}" data-full="${esc(r.name)}" style="font-weight:600">${displayName}</div>
+        </div>
         <div>
           <div class="detail-label">⭐ Mức đánh giá</div>
           <div class="detail-text" style="color:#f59e0b;font-size:20px;font-weight:700">${starDisplay} <span style="color:#374151;font-size:14px;font-weight:400">— ${esc(r.starLabel||"")}</span></div>
